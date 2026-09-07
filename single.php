@@ -33,7 +33,7 @@
       </div>
 
       <footer class="p_entry_footer">
-        <div class="m_btn_wrap">
+        <div class="m_btn-wrap">
           <a href="<?php echo esc_url(home_url('/')); ?>#news" class="m_btn_link">Back to Top</a>
         </div>
       </footer>

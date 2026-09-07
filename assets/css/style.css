@@ -351,7 +351,7 @@ body {
   font-style: italic;
   margin-bottom: 20px;
 }
-.m_text-center{
+.u_text-center{
   text-align: center;
 }
 .m_section-subttl__access{
@@ -425,9 +425,9 @@ body {
   }
 }
 /* scroll cat*/
-.main-container {
+.main_container {
   position: relative;
-  overflow: visible !important;
+  overflow: visible;
 }
 
 /* KV ----------------------------------------------*/
@@ -735,15 +735,14 @@ body {
   object-fit: cover;
   display: block;
 }
-.item_ttl-wrap{
-  display: block;
-  text-align: center;
-  margin-top: 16px;
-}
+.item_ttl-wrap,
 .item_ttl,
 .item_card-info {
   text-align: center;
   margin-top: 16px;
+}
+.item_ttl-wrap{
+  display: block;
 }
 
 .item_card-name {

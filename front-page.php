@@ -62,7 +62,7 @@
           <div class="l_container">
             <h2 class="m_section-ttl m_section-ttl__top">Item</h2>
             <div class="item_category">
-              <h3 class="m_section-subttl m_text-center">
+              <h3 class="m_section-subttl u_text-center">
                 <span class="m_section-subttl-hyphen"> - </span>Category<span class="m_section-subttl-hyphen"> - </span></h3>
                 <ul class="item_category-list">
                   <li class="item_item">                  
@@ -124,7 +124,7 @@
                 </ul>
             </div>
             <div class="item_category">
-              <h3 class="m_section-subttl m_text-center">
+              <h3 class="m_section-subttl u_text-center">
                 <span class="m_section-subttl-hyphen"> - </span>Styling<span class="m_section-subttl-hyphen"> - </span></h3>
                 <ul class="item_styling-list">
                   <?php
@@ -202,7 +202,7 @@
                 class="about_image">
               </div>
               <div class="about_text-container">
-                <h3 class="m_section-subttl m_text-center">
+                <h3 class="m_section-subttl u_text-center">
                   <span class="m_section-subttl-hyphen"> - </span>Concept <span class="m_section-subttl-hyphen"> - </span></h3>
                 <p class="about_text">
                   ここは、知る人だけが静かに楽しむ大人の遊び場。<br class="about_br">
@@ -222,13 +222,13 @@
                 class="about_image">   
               </div>
               <div class="about_text-container">
-                <h3 class="m_section-subttl m_text-center">
+                <h3 class="m_section-subttl u_text-center">
                   <span class="m_section-subttl-hyphen"> - </span>From Staff <span class="m_section-subttl-hyphen"> - </span></h3>
-                <p class="about_text about_text__staff">
+                <p class="about_text">
                   店長のヨッシーことヨシノです。<br class="about_br">
                   迷ったときは、いつでも声をかけてください。<br class="about_br">
                   無理に勧めることはありませんが、<br class="about_br">相談にはいくらでも乗ります。
-                </p>              
+                </p>
               </div>
             </div>
             <div class="m_btn-wrap m_btn-wrap__about-links">
@@ -260,7 +260,7 @@
                 </iframe>                
               </div>
             <div class="access_info-container">
-              <h3 class="m_section-subttl m_section-subttl__access">KNOWLEDGE <br class="access_br"><span class="m_section-subttl-hyphen"> - </span>Grocery Store <span class="m_section-subttl-hyphen"> - </span></h3>
+              <h3 class="m_section-subttl m_section-subttl__access">KNOWLEDGE <br><span class="m_section-subttl-hyphen"> - </span>Grocery Store <span class="m_section-subttl-hyphen"> - </span></h3>
               <div class="access_list">  
                 <table class="access_table">
                   <tr class="access_table-row">

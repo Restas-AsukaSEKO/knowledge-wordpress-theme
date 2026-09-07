@@ -15,7 +15,7 @@
           <?php endwhile; ?>
         <?php else : ?>
           <h1 class="m_section-ttl">Not Found</h1>
-          <p class="m_text-center">お探しのページが見つかりませんでした。</p>
+          <p class="u_text-center">お探しのページが見つかりませんでした。</p>
         <?php endif; ?>
       </div>
     </div>

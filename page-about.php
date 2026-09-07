@@ -17,7 +17,7 @@
                 class="about_image">
               </div>
               <div class="about_text-container">
-                <h3 class="m_section-subttl m_text-center ">
+                <h3 class="m_section-subttl u_text-center">
                   <span class="m_section-subttl-hyphen"> - </span>Concept <span class="m_section-subttl-hyphen"> - </span></h3>
                 <p class="about_text">
                 私はレッジー、この店の老猫オーナーです。<br class="about_br">
@@ -40,9 +40,9 @@
                 class="about_image">   
               </div>
               <div class="about_text-container">
-                <h3 class="m_section-subttl m_text-center">
+                <h3 class="m_section-subttl u_text-center">
                   <span class="m_section-subttl-hyphen"> - </span>From Staff <span class="m_section-subttl-hyphen"> - </span></h3>
-                <p class="about_text about_text__staff">
+                <p class="about_text">
                   店長のヨッシーことヨシノです。<br class="about_br">
                 僕が大切にしているのは、長く付き合えるかどうか。
                 今の気分だけでなく、これからの暮らしにも自然に馴染むか。
@@ -66,7 +66,7 @@
       <section class="about_info">
         <div class="l_contents-sm">
           <div class="l_container">
-            <h2 class="m_section-subttl m_text-center">
+            <h2 class="m_section-subttl u_text-center">
               <span class="m_section-subttl-hyphen"> - </span>Campany Information<span class="m_section-subttl-hyphen"> - </span></h2>
             <div class="about_info_body">
               <table class="about_info-table">

@@ -58,7 +58,7 @@
   <section class="item-styling l_section">
     <div class="l_contents">
       <div class="l_container">
-        <h3 class="m_section-subttl m_text-center">
+        <h3 class="m_section-subttl u_text-center">
           <span class="m_section-subttl-hyphen"> - </span> Styling <span class="m_section-subttl-hyphen"> - </span>
         </h3>
         
