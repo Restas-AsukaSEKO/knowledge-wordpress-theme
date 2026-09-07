@@ -38,13 +38,6 @@
                     if($recommend): ?>
                       <span class="item-meta_tag">recommend</span>
                     <?php endif; ?>
-                    <?php 
-                    $tags = get_field('other');
-                   if( $tags): ?>
-                   <?php foreach ($tags as $tag ): ?>
-                    <span class="item-meta_tag"><?php echo esc_html($tag); ?></span>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
                   </div>
                 </div>
               </div>
