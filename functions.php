@@ -115,9 +115,23 @@ function my_allowed_block_types_all($allowed_blocks, $editor_context) {
 /**
  * 外部ファイル＆JS
  */
-function my_enqueue_scripts() {    
+function my_enqueue_scripts() {
+    // ベースCSS（リセット→テーマ本体の順で読み込む）
     wp_enqueue_style(
-        'google-fonts', 
+        'destyle-css',
+        get_template_directory_uri() . '/assets/css/destyle.css',
+        array(),
+        '4.0.1'
+    );
+    wp_enqueue_style(
+        'theme-style',
+        get_template_directory_uri() . '/assets/css/style.css',
+        array('destyle-css'),
+        '1.0.0'
+    );
+
+    wp_enqueue_style(
+        'google-fonts',
         'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Sans+JP:wght@400;700&display=swap', 
         array(), 
         null
