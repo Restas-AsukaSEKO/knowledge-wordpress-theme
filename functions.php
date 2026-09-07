@@ -1,6 +1,11 @@
 <?php
-//削除禁止
-    include(get_theme_root() . '/themesMain/assets/sub_admin.php');
+/**
+ * カスタム投稿タイプ・タクソノミー登録
+ * （旧: 外部共有ファイル themesMain/sub_admin.php に依存していたが、
+ *   テーマ単体で動作するようテーマ内に移設）
+ */
+require_once get_theme_file_path('inc/custom-post-types.php');
+require_once get_theme_file_path('inc/taxonomies.php');
 ?>
 <?php
 /*↓↓教科書から抜粋・・↓↓
