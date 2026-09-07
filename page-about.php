@@ -94,7 +94,7 @@
                   <th class="about_info-table_heading">所在地</th>
                   <td class="about_info-table_data">
                     <?php echo esc_html(get_field('company_post_number')); ?></br>
-                    <?php echo esc_html(get_field('company_mail')); ?>
+                    <?php echo esc_html(get_field('company_address')); ?>
                   </td>
                 </tr>
               </table>

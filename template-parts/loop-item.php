@@ -11,13 +11,8 @@
                 <div class="item_card-info">
                   <p class="item_card-name"><?php the_title(); ?></p>
                   <p class="item_card-price">
-                    ¥<?php 
-                    $price = get_post_meta(get_the_ID(), 'price', true); 
-                    echo $price
-                    ?>
+                    ¥<?php echo esc_html(get_field('price')); ?>
                   </p>
                 </div>
               </a>
             </article>
-
-            <!-- <?php echo get_field('price'); ?>これはAFCプラグイン専用、get_post_meta(get_the_ID(), 'price', true)こっちはWordpress標準 -->

@@ -1,0 +1,49 @@
+[
+    {
+        "key": "group_knowledge_styling",
+        "title": "スタイリング情報",
+        "fields": [
+            {
+                "key": "field_knowledge_styling_related_item",
+                "label": "関連するアイテム",
+                "name": "related_item",
+                "aria-label": "",
+                "type": "post_object",
+                "instructions": "このスタイリング投稿のリンク先となる商品(item)を1件選択してください。スタイリング投稿はこの項目を通じて商品ページへ遷移するため、必ず選択してください。",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "item"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "id",
+                "ui": 1
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "styling"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "スタイリング(styling)投稿タイプ用の追加項目",
+        "show_in_rest": 0
+    }
+]

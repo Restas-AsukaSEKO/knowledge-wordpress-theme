@@ -1,0 +1,94 @@
+[
+    {
+        "key": "group_knowledge_item",
+        "title": "アイテム情報",
+        "fields": [
+            {
+                "key": "field_knowledge_item_price",
+                "label": "価格",
+                "name": "price",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "税込価格を半角数字のみで入力してください（例：8800）。「¥」は自動で表示されます。",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "min": 0,
+                "max": "",
+                "placeholder": "8800",
+                "step": 1,
+                "prepend": "¥",
+                "append": ""
+            },
+            {
+                "key": "field_knowledge_item_recommend",
+                "label": "おすすめ商品にする",
+                "name": "recommend",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "チェックすると商品詳細ページに「recommend」タグが表示されます。",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_knowledge_item_other",
+                "label": "タグ",
+                "name": "other",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "商品詳細ページに表示するタグを選択してください（複数選択可）。選択肢は運用に合わせて追加・変更してください。",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "new": "new",
+                    "sale": "sale",
+                    "limited": "limited"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "item"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "商品(item)投稿タイプ用の追加項目",
+        "show_in_rest": 0
+    }
+]
