@@ -72,7 +72,7 @@ get_header();
         <div class="l_contents-sm">
           <div class="l_container">
             <h2 class="m_section-subttl u_text-center">
-              <span class="m_section-subttl-hyphen"> - </span>Campany Information<span class="m_section-subttl-hyphen"> - </span></h2>
+              <span class="m_section-subttl-hyphen"> - </span>Company Information<span class="m_section-subttl-hyphen"> - </span></h2>
             <div class="about_info_body">
               <table class="about_info-table">
                 <tr class="about_info-table_row">

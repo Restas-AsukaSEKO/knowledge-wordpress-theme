@@ -168,24 +168,6 @@ body {
   letter-spacing: 0.05em;
   text-align: center;
 }
-.l_footer_sns {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-block: 12px;
-}
-
-.l_sns_icon {
-    font-size: 20px; 
-    color: var(--color-white);
-    transition: 0.3s;
-}
-
-.l_sns_icon:hover {
-    color: var(--color-accent1);    /* ホバー時の色 */
-    transform: translateY(-3px); /* ぴょこっと上に動く */
-}
-
 @media (max-width: 767px) {
   .l_header-inner {
     padding-inline: 12px;
@@ -470,6 +452,7 @@ body {
 }
 
 .kv_character {
+  position: relative; /* 吹き出し・TOPボタンの位置基準。追従(sticky)自体はkv_character_wrapper側の設定のまま */
   width: 100px;
   height: auto;
   opacity: 0.8;
@@ -482,6 +465,76 @@ body {
   height: auto;
   display: block;
   filter: contrast(1.1) brightness(0.9);
+}
+
+/* --- レッジー：セクション吹き出し ------------------ */
+.ledgee_bubble {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 10px;
+  max-width: 150px;
+  padding: 8px 12px;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-family-subheading);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.ledgee_bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- レッジー：TOPへ戻るボタン ----------------------
+   猫の足元(画像下端)にボタン上端を接続し、「レッジーが小さなボタンの上に
+   乗っている」ように見せる。画像下端から少しだけ潜らせて自然に接続させ、
+   胴体・顔には掛からない高さに留める。PC/SPともこの考え方で統一する。 */
+.ledgee_top-btn {
+  position: absolute;
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  margin-top: -4px;
+  transform: translateX(-50%) translateY(-6px);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 10px;
+  background: rgba(51, 51, 51, 0.85);
+  color: var(--color-white);
+  font-family: var(--font-family-subheading);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+.ledgee_top-btn.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.ledgee_top-btn:hover {
+  background: var(--color-accent1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ledgee_bubble,
+  .ledgee_top-btn {
+    transition: opacity 0.15s linear;
+    transform: none !important;
+  }
 }
 
 .js-slider {
@@ -526,6 +579,60 @@ body {
   .kv_slider-item img {
     height: 60svh;
   }
+
+  /* FV（KV領域）を表示している間は、吹き出し・TOPボタンとも表示しない */
+  .kv_character:not(.is-fixed-nav) .ledgee_bubble,
+  .kv_character:not(.is-fixed-nav) .ledgee_top-btn {
+    display: none;
+  }
+
+  /* FVをスクロールして画面外へ抜けたら、レッジー本人を画面端にfixed表示してナビゲーターにする */
+  .kv_character.is-fixed-nav {
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: 16px;
+    bottom: 20px;
+    width: 40px;
+    margin: 0;
+    z-index: 50; /* ヘッダー(100)・SPナビ(90)より低くし、開いたメニューの邪魔をしない */
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .kv_character.is-fixed-nav.is-shown {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+  /* Item／Stylingでは案内(吹き出し)を終えたら画面右方向へ一時退避し、商品写真を隠さないようにする */
+  .kv_character.is-fixed-nav.is-shown.is-retreated {
+    opacity: 0;
+    transform: translateX(60px);
+    pointer-events: none;
+  }
+  /* 商品画像・カードのクリック領域は本体画像の下に常に透過させ、
+     視覚的にわずかに重なっても操作を妨げないようにする */
+  .kv_character.is-fixed-nav .kv_cat_img {
+    pointer-events: none;
+  }
+
+  /* SPの吹き出し・TOPボタンはPCより一回り小さくし、本文やCTAに重ならないようにする */
+  .kv_character .ledgee_bubble {
+    max-width: 130px;
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+  .kv_character .ledgee_top-btn {
+    font-size: 0.6rem;
+    padding: 2px 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kv_character.is-fixed-nav {
+      transition: opacity 0.15s linear;
+      transform: none !important;
+    }
+  }
 }
 @media screen and (min-width: 768px) {
   .kv_character_wrapper {
@@ -537,7 +644,7 @@ body {
   }
   .kv_character {
     margin-left: auto;
-    margin-right: 40px;
+    margin-right: 12px; /* viewport右端ぎりぎりに寄せ、商品グリッドへの侵入を最小限にする */
   }
 }
 
@@ -1099,24 +1206,12 @@ body {
   margin: 40px auto 0;
 }
 
-.access_map-wrap {
-  flex: 0 1 480px;
-}
-
-.access_map {
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  filter: grayscale(1) contrast(0.8);
-}
-
 .access_info-container {
-  flex: 1;
+  flex: 0 1 480px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  padding-left: 40px;
 }
 
 .access_info-container .m_section-subttl {
@@ -1148,15 +1243,6 @@ body {
     flex-direction: column;
     gap: 30px;
     }
-
-  .access_map-wrap {
-    flex: none;
-    width: 100%;
-  }
-
-  .access_info-container {
-    padding-left: 0;
-  }
 }
 /* --- Contact ------------------------------ */
 .contact {
@@ -1255,15 +1341,4 @@ body {
     font-size: 0.85rem;
     text-align: left; 
   }
-}
-/* breadcrumb */
-.breadcrumb {
-  padding: 8px;
-  color: var(--color-accent1);
-  background: var(--background-main);
-  font-size: 0.8rem;
-}
-
-.breadcrumb_inner > span:last-child {
-  color: var(--color-gold); 
 }

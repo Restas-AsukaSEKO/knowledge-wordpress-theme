@@ -1,5 +1,4 @@
-[
-    {
+{
         "key": "group_knowledge_styling",
         "title": "スタイリング情報",
         "fields": [
@@ -46,4 +45,3 @@
         "description": "スタイリング(styling)投稿タイプ用の追加項目",
         "show_in_rest": 0
     }
-]

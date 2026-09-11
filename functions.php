@@ -20,7 +20,7 @@ add_theme_support('title-tag');
  */
 add_filter('document_title_separator', 'my_document_title_separator');
 function my_document_title_separator($separator) {
-    $separator ='----';
+    $separator ='|';
     return $separator;
 }
 
@@ -180,11 +180,22 @@ function my_enqueue_scripts() {
     // ④ home.jsを読み込む
     wp_enqueue_script(
         'home-js', // 名前：home-js
-        get_template_directory_uri() . '/assets/js/home.js', 
+        get_template_directory_uri() . '/assets/js/home.js',
         array('main-js'), // 「main-js」の後に読み込む
-        '1.0.0', 
+        '1.0.0',
         true
     );
+
+    // ⑤ レッジー(ナビゲーター機能)のJS。TOPページにのみ存在する要素を操作するためTOPページ限定で読み込む
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'ledgee-nav-js',
+            get_template_directory_uri() . '/assets/js/ledgee-nav.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
 
@@ -204,6 +215,84 @@ function my_acf_post_object_result_fix( $title, $post, $field, $post_id ) {
         // もしこれでもタグが出るなら、最終手段は「タイトル（ID）」という表示のみにします。
         $title = sprintf('<img src="%s" style="width:24px;height:24px;margin-right:5px;vertical-align:middle;" /> %s', esc_url($thumb_url[0]), $title);
     }
-    
+
     return $title;
+}
+
+/**
+ * meta descriptionの最低限対応
+ * SEOプラグインは使用せず、WordPress標準の条件分岐関数(is_front_page等)と
+ * 投稿本文(get_the_excerpt)を使って、主要ページに1つだけdescriptionを出力する。
+ * 投稿ごとの個別ハードコードは行わず、共通ルールで動的に生成する。
+ */
+add_action('wp_head', 'knowledge_output_meta_description', 1);
+function knowledge_output_meta_description() {
+    $description = knowledge_get_meta_description();
+    if ($description) {
+        echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+    }
+}
+
+function knowledge_trim_description($text, $length = 120) {
+    $text = wp_strip_all_tags($text);
+    $text = preg_replace('/\s+/u', ' ', $text);
+    $text = trim($text);
+    if (mb_strlen($text) > $length) {
+        $text = mb_substr($text, 0, $length) . '…';
+    }
+    return $text;
+}
+
+function knowledge_get_meta_description() {
+    // TOP
+    if (is_front_page()) {
+        return '知ってる人ほど、静かに選ぶ。メンズセレクトショップ KNOWLEDGE（ノーレッジ）。デニムやシャツなど、長く付き合える一生モノのアイテムを取り扱っています。';
+    }
+
+    // News一覧
+    if (is_page('news')) {
+        return 'KNOWLEDGEからのお知らせ・新作アイテム情報・セール情報の一覧です。';
+    }
+
+    // News詳細（通常投稿）：本文からWordPress標準の抜粋機能で生成
+    if (is_singular('post')) {
+        $excerpt = get_the_excerpt();
+        return $excerpt
+            ? knowledge_trim_description($excerpt)
+            : knowledge_trim_description(get_the_title() . ' - KNOWLEDGEからのお知らせです。');
+    }
+
+    // Item一覧
+    if (is_post_type_archive('item')) {
+        return 'KNOWLEDGEが取り扱うアイテムの一覧です。デニム・Tシャツ・ウェアラブル・グッズなど、カテゴリーごとにご覧いただけます。';
+    }
+
+    // Item詳細：本文からWordPress標準の抜粋機能で生成
+    if (is_singular('item')) {
+        $excerpt = get_the_excerpt();
+        return $excerpt
+            ? knowledge_trim_description(get_the_title() . '。' . $excerpt)
+            : knowledge_trim_description(get_the_title() . ' - KNOWLEDGEが取り扱うアイテムです。');
+    }
+
+    // Styling詳細：本文を持たない投稿タイプのため、関連アイテム(ACF)から生成
+    if (is_singular('styling')) {
+        $related_id = function_exists('get_field') ? get_field('related_item', get_the_ID()) : null;
+        $related_title = $related_id ? get_the_title($related_id) : '';
+        return $related_title
+            ? knowledge_trim_description(get_the_title() . ' - ' . $related_title . 'を使ったKNOWLEDGEのスタイリング例です。')
+            : knowledge_trim_description(get_the_title() . ' - KNOWLEDGEのスタイリング例です。');
+    }
+
+    // About
+    if (is_page('about')) {
+        return 'メンズセレクトショップ KNOWLEDGE の会社概要・コンセプトについてご紹介します。';
+    }
+
+    // Contact
+    if (is_page('contact')) {
+        return 'KNOWLEDGEへのお問い合わせはこちらから。商品に関するご質問などお気軽にご連絡ください。';
+    }
+
+    return '';
 }

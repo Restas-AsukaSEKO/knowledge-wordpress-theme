@@ -22,3 +22,16 @@ desktop.ini
 *.tmp
 *.bak
 *.zip
+
+# WordPress / local environment
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+*.sql
+*.sql.gz
+
+# Node
+node_modules/
+
+# Local AI development instructions
+CLAUDE.md

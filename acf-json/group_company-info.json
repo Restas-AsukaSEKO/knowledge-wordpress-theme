@@ -1,5 +1,4 @@
-[
-    {
+{
         "key": "group_knowledge_company_info",
         "title": "会社概要",
         "fields": [
@@ -148,4 +147,3 @@
         "description": "会社概要ページ(page-about.php)用のフィールド。company_addressは所在地表示の不具合修正のために新規追加",
         "show_in_rest": 0
     }
-]

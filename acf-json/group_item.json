@@ -1,5 +1,4 @@
-[
-    {
+{
         "key": "group_knowledge_item",
         "title": "アイテム情報",
         "fields": [
@@ -65,4 +64,3 @@
         "description": "商品(item)投稿タイプ用の追加項目",
         "show_in_rest": 0
     }
-]

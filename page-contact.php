@@ -11,42 +11,30 @@
             どうぞお気軽にお問い合わせください。
           </p>
 
-          <form action="#" method="post" class="contact_form">
-            <div class="contact_item">
-              <label class="contact_label" for="name">Name <span class="contact_tag">必須</span></label>
-              <div class="contact_input-wrap">
-                <input type="text" id="name" name="your-name" placeholder="山田 太郎" required>
-              </div>
-            </div>
-
-            <div class="contact_item">
-              <label class="contact_label" for="kana">Kana <span class="contact_tag">必須</span></label>
-              <div class="contact_input-wrap">
-                <input type="text" id="kana" name="your-kana" placeholder="ヤマダ タロウ" required>
-              </div>
-            </div>
-
-            <div class="contact_item">
-              <label class="contact_label" for="email">Email <span class="contact_tag">必須</span></label>
-              <div class="contact_input-wrap">
-                <input type="email" id="email" name="your-email" placeholder="example@mail.com" required>
-              </div>
-            </div>
-
-            <div class="contact_item">
-              <label class="contact_label" for="message">Message <span class="contact_tag">必須</span></label>
-              <div class="contact_input-wrap">
-                <textarea id="message" name="your-message" rows="8" placeholder="お問い合わせ内容をご記入ください"></textarea>
-              </div>
-            </div>
-
-            <div class="contact_btn-wrap">
-              <button type="submit" class="m_btn_link contact_submit">Send Message</button>
-            </div>
-          </form>
+          <?php
+          // Contact Form 7（「Contact」という名前のフォームをタイトルで検索し、IDをハードコードしない）
+          $cf7_form = get_posts([
+            'post_type'   => 'wpcf7_contact_form',
+            'title'       => 'Contact',
+            'numberposts' => 1,
+          ]);
+          if ($cf7_form) :
+            echo do_shortcode('[contact-form-7 id="' . $cf7_form[0]->ID . '" title="Contact" html_class="contact_form"]');
+          endif;
+          ?>
         </div>
       </div>
-    </section>      
+    </section>
   </main>
+
+  <?php if ($cf7_form) : ?>
+  <script>
+  document.addEventListener('wpcf7mailsent', function (event) {
+    if (event.detail.contactFormId === <?php echo (int) $cf7_form[0]->ID; ?>) {
+      location = '<?php echo esc_js(home_url('/contact/thanks/')); ?>';
+    }
+  }, false);
+  </script>
+  <?php endif; ?>
 
 <?php get_footer(); ?>

@@ -2,10 +2,13 @@
 
   <main class="main main_container">
     <div class="kv_character_wrapper">
-      <div class="kv_character">
+      <div class="kv_character js-ledgee">
+        <div class="ledgee_bubble js-ledgee-bubble" aria-hidden="true"></div>
+        <button type="button" class="ledgee_top-btn js-ledgee-top" aria-label="ページの先頭へ戻る" aria-hidden="true"><span aria-hidden="true">↑</span> TOP</button>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/Ledgee_lg.webp" alt="店主レッジー" class="kv_cat_img">
       </div>
-    </div> 
+    </div>
+
     <?php if (is_home()): ?>
       <div class="kv_wrapper">
         <div class="js-slider">
@@ -53,6 +56,11 @@
               <?php endif; ?>
               <?php wp_reset_postdata(); ?>
             </ul>
+            <div class="m_btn-wrap">
+              <p class="m_btn">
+              <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>" class="m_btn_link">View more</a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -123,7 +131,7 @@
                   </li>            
                 </ul>
             </div>
-            <div class="item_category">
+            <div class="item_category" id="styling">
               <h3 class="m_section-subttl u_text-center">
                 <span class="m_section-subttl-hyphen"> - </span>Styling<span class="m_section-subttl-hyphen"> - </span></h3>
                 <ul class="item_styling-list">
@@ -248,28 +256,28 @@
           <div class="l_container">
             <h2 class="m_section-ttl m_section-ttl__top">Access</h2>
             <div class="access_wrapper">
-              <div class="access_map-wrap">
-                <iframe class="access_map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3247.5995307661397!2d134.1910509!3d35.514179399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35558e15f5509319%3A0x1fbcab88c23686ba!2z5qCq5byP5Lya56S-44OK44Os44OD44K444K144Od44O844OI!5e0!3m2!1sja!2sjp!4v1770844467520!5m2!1sja!2sjp" 
-                  width="600" 
-                  height="450" 
-                  style="border:0;" 
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade">
-                </iframe>                
-              </div>
             <div class="access_info-container">
               <h3 class="m_section-subttl m_section-subttl__access">KNOWLEDGE <br><span class="m_section-subttl-hyphen"> - </span>Grocery Store <span class="m_section-subttl-hyphen"> - </span></h3>
-              <div class="access_list">  
+              <div class="access_list">
+                <?php
+                // 会社情報(TEL/住所)はAboutページのACF会社概要を一元的な参照元とする
+                $company_info_page = get_posts([
+                  'post_type'   => 'page',
+                  'meta_key'    => '_wp_page_template',
+                  'meta_value'  => 'page-about.php',
+                  'numberposts' => 1,
+                ]);
+                $company_tel = $company_info_page ? get_field('company_tel', $company_info_page[0]->ID) : '';
+                $company_address = $company_info_page ? get_field('company_address', $company_info_page[0]->ID) : '';
+                ?>
                 <table class="access_table">
                   <tr class="access_table-row">
                     <th class="access_table-heading">Address</th>
-                    <td class="access_table_data">鳥取市湖山町東 5-5</td>
+                    <td class="access_table_data"><?php echo esc_html($company_address); ?></td>
                   </tr>
                   <tr class="access_table-row">
                     <th class="access_table-heading">TEL</th>
-                    <td class="access_table_data">0857-xxxx-xxxx</td>
+                    <td class="access_table_data"><?php echo esc_html($company_tel); ?></td>
                   </tr>
                   <tr class="access_table-row">
                     <th class="access_table-heading">OPEN</th>
