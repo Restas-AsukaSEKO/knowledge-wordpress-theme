@@ -20,15 +20,21 @@
           <div class="item-detail_info">
             <h1 class="item-detail_name"><?php the_title(); ?></h1>
             <p class="item-detail_price">¥<?php echo get_field('price'); ?> <span class="tax-in">(tax in)</span></p>
-            
-            <div class="item-detail_description">
-              <?php the_content(); ?>
-            </div>
+
             <div class="item-meta">
               <div class="item-meta_content">
                 <div class="item-meta_item">
                   <span class="item-meta_label">Category:</span>
-                  <?php echo get_the_term_list(get_the_ID(), 'item_category', '', '', ''); ?>
+                  <?php
+                  $item_categories = get_the_terms(get_the_ID(), 'item_category');
+                  if ($item_categories && !is_wp_error($item_categories)) :
+                    foreach ($item_categories as $term) :
+                  ?>
+                    <a href="<?php echo esc_url(home_url('/item/#' . $term->slug)); ?>"><?php echo esc_html($term->name); ?></a>
+                  <?php
+                    endforeach;
+                  endif;
+                  ?>
                 </div>
                 <div class="item-meta_item">
                   <span class="item-meta_label">Tags:</span>
@@ -42,6 +48,12 @@
                 </div>
               </div>
             </div>
+
+            <?php if (trim(get_the_content()) !== '') : ?>
+              <div class="item-detail_description">
+                <?php the_content(); ?>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -92,8 +104,8 @@
               $styling_terms = get_the_terms(get_the_ID(), 'item_category');
               if($styling_terms && !is_wp_error($styling_terms)): 
                 foreach( $styling_terms as $term) : ?>
-                  <a href="<?php echo get_term_link($term); ?>" class="m_category-card">
-                    <?php echo $term->name; ?>
+                  <a href="<?php echo esc_url(home_url('/item/#' . $term->slug)); ?>" class="m_category-card">
+                    <?php echo esc_html($term->name); ?>
                   </a>
                 <?php endforeach; 
                 endif ; ?>

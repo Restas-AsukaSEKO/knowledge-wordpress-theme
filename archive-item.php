@@ -31,7 +31,7 @@
         $query = new WP_Query($args);
         ?>
 
-        <div id="<?php echo ucfirst($term->slug); ?>" class="item_category-group">
+        <div id="<?php echo esc_attr($term->slug); ?>" class="item_category-group">
           <h3 class="m_section-subttl">
             <span class="m_section-subttl-hyphen"> - </span><?php echo $term->name; ?> <span class="m_section-subttl-hyphen"> - </span>
           </h3>
@@ -45,7 +45,13 @@
         </div>
       <?php endforeach; ?>
       <?php endif;?>
-        
+
+        <div class="m_btn-wrap">
+          <p class="m_btn">
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="m_btn_link">Back to Home</a>
+          </p>
+        </div>
+
       </div>
     <!-- l_container -->
     </div>
